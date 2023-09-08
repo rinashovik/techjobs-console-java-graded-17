@@ -19,7 +19,7 @@ public class TechJobsTest {
     private static ByteArrayOutputStream baos;
 
     // set up an alternative output stream to capture output
-    // this needs to be done before every test so we don't contaminate test output
+    // this needs to be done before every test, so we don't contaminate test output
     @Before
     public void setUpOutputStream() {
         baos = new ByteArrayOutputStream();
@@ -69,6 +69,5 @@ public class TechJobsTest {
         String expected = getFileContents("src/test/resources/testCaseInsensitiveSearch.txt");
         assertEquals(expected.replaceAll("\r\n?", "\n"), output.replaceAll("\r\n?", "\n"));
     }
-
 
 }

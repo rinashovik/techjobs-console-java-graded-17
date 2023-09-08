@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * Created by LaunchCode
@@ -10,8 +10,8 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
-
+    public static void main(String[] args) {
+       // JobData.capitalizeWord("hello world");
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
         columnChoices.put("core competency", "Skill");
@@ -49,23 +49,28 @@ public class TechJobs {
                     // Print list of skills, employers, etc
                     for (String item : results) {
                         System.out.println(item);
+
                     }
                 }
 
-            } else { // choice is "search"
+            } else{ // choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices);
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
+
                 String searchTerm = in.nextLine();
+               searchTerm = searchTerm.toLowerCase();
 
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
                 } else {
+
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
+               // System.out.println("No Results******");// Not Wright Place
             }
         }
     }
@@ -77,7 +82,7 @@ public class TechJobs {
         Boolean validChoice = false;
         String[] choiceKeys = new String[choices.size()];
 
-        // Put the choices in an ordered structure so we can
+        // Put the choices in an ordered structure, so we can
         // associate an integer with each one
         int i = 0;
         for (String choiceKey : choices.keySet()) {
@@ -112,14 +117,38 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
-    // Print a list of jobs
+    // Print a list of job
+
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
-    }
-}
+
+       if(!someJobs.isEmpty()){//
+//            System.out.println("No Results");
+//
+//        } else {
+
+            for (HashMap<String, String> e : someJobs) {
+                System.out.println("\n*****");// good
+
+                for (String i : e.keySet()) {
+
+                   System.out.println( i + ": " + e.get(i));
+
+                }
+                System.out.printf("%S%n", "*****");
+
+
+                   // System.out.println("Jobs Found: " + someJobs.size());
+                   }
+
+                }
+       else{
+           System.out.printf("%s","No Results");
+       }
+            }
+       }
