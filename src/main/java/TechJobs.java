@@ -39,6 +39,7 @@ public class TechJobs {
                 String columnChoice = getUserSelection("List", columnChoices);
 
                 if (columnChoice.equals("all")) {
+
                     printJobs(JobData.findAll());
                 } else {
 
@@ -65,12 +66,12 @@ public class TechJobs {
                searchTerm = searchTerm.toLowerCase();
 
                 if (searchField.equals("all")) {
+
                     printJobs(JobData.findByValue(searchTerm));
                 } else {
 
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
-               // System.out.println("No Results******");// Not Wright Place
             }
         }
     }
@@ -127,28 +128,26 @@ public class TechJobs {
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
 
-       if(!someJobs.isEmpty()){//
-//            System.out.println("No Results");
-//
-//        } else {
+       if(someJobs.isEmpty()){//
+            System.out.print("No Results");
+
+        } else {
 
             for (HashMap<String, String> e : someJobs) {
-                System.out.println("\n*****");// good
+                System.out.println("\n*****");
+                //System.out.printf("%S%n", "*****");
 
                 for (String i : e.keySet()) {
 
                    System.out.println( i + ": " + e.get(i));
 
                 }
-                System.out.printf("%S%n", "*****");
+               System.out.printf("%S%n", "*****");
 
-
-                   // System.out.println("Jobs Found: " + someJobs.size());
+                   // System.out.println(someJobs.size()+ " - Jobs Found " );
                    }
 
                 }
-       else{
-           System.out.printf("%s","No Results");
-       }
+
             }
        }

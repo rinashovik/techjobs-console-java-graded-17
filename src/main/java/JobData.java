@@ -6,9 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 
 /**
@@ -19,7 +17,18 @@ public class JobData {
     private static final String DATA_FILE = "src/main/resources/job_data.csv";
     private static boolean isDataLoaded = false;
 
-    private static ArrayList<HashMap<String, String>> allJobs;
+    private  static ArrayList<HashMap<String, String>> allJobs;
+
+
+//    public static ArrayList<HashMap<String, String>> getAllJobs() {
+//        return allJobs;
+//    }
+//
+//    public static void setAllJobs(ArrayList<HashMap<String, String>> allJobs) {
+//        loadData();
+//
+//        JobData.allJobs = allJobs;
+//    }
 
     /**
      * Fetch list of all values from loaded data,
@@ -28,7 +37,11 @@ public class JobData {
      * @param field The column to retrieve values from
      * @return List of all the of the values of the given field
      */
-    public static ArrayList<String> findAll(String field) {
+
+
+
+
+    public  static ArrayList<String> findAll(String field) {
 
         // load data, if not already loaded
         loadData();
@@ -37,22 +50,28 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
             String aValue = row.get(field);
+            System.out.println(aValue);
+
 
             if (!values.contains(aValue)) {
                 values.add(aValue);
             }
+            Collections.sort(values);// Sorting the values
+
         }
 
         return values;
     }
 
-    public static ArrayList<HashMap<String, String>> findAll() {
+    public  static ArrayList<HashMap<String, String>> findAll() {
+        //public  ArrayList<HashMap<String, String>> findAll() {
 
         // load data, if not already loaded
         loadData();
 
         return allJobs;
     }
+
 
     /*
      * Returns results of search the jobs data by key/value, using
@@ -75,8 +94,6 @@ public class JobData {
 
 
         for (HashMap<String, String> row : allJobs) {
-
-
 
             String aValue = row.get(column).toLowerCase();
 
@@ -101,22 +118,28 @@ public class JobData {
         // load data, if not already loaded
         loadData();
         // TODO - implement this method
+
+
         ArrayList<HashMap<String, String>> matchingJobs = new ArrayList<>();
+
         for (HashMap<String, String> e : allJobs) {// for-loop through array
 
             for (String i: e.keySet()) {
 
+                    String matchValue = e.get(i).toLowerCase();// get values from hashMap
 
-                String matchValue = e.get(i).toLowerCase();// get values from hashMap
-             //   System.out.println(value);
-                if (matchValue.contains(value)) {
+                    if (matchValue.contains(value)) {
 
+                       // if(matchValue.matches(value)){// Exact search value matching// good for matching search
 
-                    matchingJobs.add(e);
+                        matchingJobs.add(e);
+                        break;
                 }
+
             }
 
-        }
+               }
+
         return matchingJobs;
     }
 
